@@ -10,7 +10,20 @@ RUN apk add --no-cache \
     py3-pip \
     bash \
     openssh-client \
-    git
+    git \
+    && pip3 install --upgrade pip
+
+# Install the latest version of Ansible
+RUN pip3 install ansible
+
+# Optional: Install additional libraries required for Ansible Playbooks
+RUN apk add --no-cache \
+    openssl \
+    python3-dev \
+    libffi-dev \
+    gcc \
+    musl-dev \
+    && pip3 install cryptography
 
 # Copy requirements.txt into the container
 COPY requirements.txt /app/requirements.txt
